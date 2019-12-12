@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <title>My Grades</title>
+</head>
+<body>
+    <div id="app">
+        <div class="background">
+        </div>
+        <div class="header">
+            <h1>My Grades</h1>
+            <h2>Aus G</h2>
+                
+            <p v-if="errors.length">
+                <b>Please check if you typed a valid number in the orange text fields</b>
+            </p>
+        </div>
+        <div class="container">
+            <div class="panel" style="width: 100%;">
+                <div class="initial" v-bind:class="{ hide: isHide }">
+                    <input type="number" v-model.number="countGrades" placeholder="How many records?">
+                    <button class="button" v-on:click="setLimit"> Add</button>
+                </div>
+                
+                <br>
+                <div class="group-input" v-bind:class="{ hide: isShow }">
+                    <h1>Input each grade</h1>
+                    <p>values from 1 - 100</p>
+                    <div class="grade-input" v-for="(grade, index) in grades" :key="index">
+                        <input type="" v-bind:class="{ invalid: grade.invalid }" v-model.number="grade.value" :ref="'grade_' + index" placeholder="Input a grade"><br>
+                    </div>
+                </div>
+
+            </div>
+            <div class="sub-panel" v-bind:class="{ hide: isShow }">
+                <button class="button-go" v-on:click="CalcAll"> Calculate</button>
+                <h1>Average</h1>
+                <h3>{{average}}</h3>
+                <h1>Highest</h1>
+                <h3>{{high}}</h3>
+                <h1>Lowest</h1>
+                <h3>{{low}}</h3>
+                <h1>Median</h1>
+                <h3>{{median}}</h3>
+            </div>
+        </div>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
